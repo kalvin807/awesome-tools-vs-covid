@@ -8,18 +8,24 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-    name: Publish Page
+  build_gatsby:
+    name: build
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v2
-    - name: Install packages
-      uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: install
-    - name: Deploy to gh-pages
-      uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: run deploy
+      - uses: actions/checkout@v2
+
+      - name: yarn install
+        run: yarn install
+
+      - name: gatsby build
+        env:
+          GH_API_KEY: ${{ secrets.GITHUB_API_KEY }}
+        run: yarn build
+
+      - name: deploy
+        uses: maxheld83/ghpages@v0.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PAT: ${{ secrets.GITHUB_API_KEY }}
+          BUILD_DIR: "public/"
 
