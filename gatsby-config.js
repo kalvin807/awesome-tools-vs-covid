@@ -5,5 +5,6 @@
  */
 
 module.exports = {
+  pathPrefix: '/awesome-tools-vs-covid',
   plugins: [`gatsby-plugin-material-ui`],
 }
