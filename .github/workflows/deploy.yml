@@ -13,15 +13,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
- 
-      - name: Install and Build 🔧 
+
+      - name: Install and Build 🔧
         run: |
           yarn install
           yarn run build
- 
+
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@3.4.2
         with:
           ACCESS_TOKEN: ${{ secrets.GITHUB_API_KEY }}
           BRANCH: gh-pages
           FOLDER: public
+          CLEAN: True
