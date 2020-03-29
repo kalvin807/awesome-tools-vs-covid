@@ -17,7 +17,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           yarn install
-          yarn run build
+          yarn run build --prefix-paths
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.4.2
