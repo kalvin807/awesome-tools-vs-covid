@@ -48,7 +48,8 @@ export const mapDataToSeachMap = data => {
   while (tool) {
     const idx = tool[0]
     const toolDetail = tool[1]
-    Object.values(toolDetail).forEach(detail => {
+    Object.values(toolDetail).forEach(ele => {
+      const detail = ele.toLowerCase()
       const prev = searchMap.get(detail) || []
       const newValue = Array.from(new Set([...prev, idx]))
       searchMap.set(detail, newValue)

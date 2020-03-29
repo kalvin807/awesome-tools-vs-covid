@@ -1,10 +1,11 @@
 import React from 'react'
 
 import AppBar from '@material-ui/core/AppBar'
-import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+
+import AboutButton from './AboutButton'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +21,7 @@ const AppBarMenu = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar color="primary" position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Awesome Tools versus COVID-19{' '}
@@ -28,7 +29,7 @@ const AppBarMenu = () => {
               💪
             </span>
           </Typography>
-          <Button color="inherit">About me</Button>
+          <AboutButton />
         </Toolbar>
       </AppBar>
     </div>

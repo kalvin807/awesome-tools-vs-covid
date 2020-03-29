@@ -1,25 +1,17 @@
 import React from 'react'
 
-import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 
-import AppBarMenu from '../components/AppBar'
 import FloatAddButton from '../components/FloatAddButton'
-import Footer from '../components/Footer'
+import InfoAlert from '../components/InfoAlert'
 import InfoCard from '../components/InfoCard'
-import SearhBox from '../components/SearchBox'
+import SearchBox from '../components/SearchBox'
 import getGSheetData from '../utils/gSheetFetcher'
 
-const useStyles = makeStyles(theme => ({
-  searchBox: {
+const useStyles = makeStyles(() => ({
+  center: {
     textAlign: 'center',
-  },
-  footer: {
-    marginTop: 'auto',
-    bottom: 0,
-    textAlign: 'center',
-    marginBottom: theme.spacing(2),
   },
 }))
 
@@ -42,25 +34,22 @@ const App = () => {
 
   return (
     <>
-      <AppBarMenu />
-      <Container maxWidth="xl" direction="column">
-        <div className={classes.searchBox}>
-          <SearhBox data={data} setFilteredItem={setFilteredItem} />
-        </div>
-        <Grid container spacing={3}>
-          {filteredItem.map((element, idx) => (
-            <Grid key={`Tool-${idx}`} item lg={3} md={6} xs={12}>
-              <InfoCard key={`Tool-${idx}`} data={element} />
-            </Grid>
-          ))}
-        </Grid>
-        <div className={classes.searchBox}>
-          <FloatAddButton />
-        </div>
-        <div className={classes.footer}>
-          <Footer />
-        </div>
-      </Container>
+      <div>
+        <InfoAlert />
+      </div>
+      <div className={classes.center}>
+        <SearchBox data={data} setFilteredItem={setFilteredItem} />
+      </div>
+      <Grid container spacing={3}>
+        {filteredItem.map((element, idx) => (
+          <Grid key={`Tool-${idx}`} item lg={3} md={6} xs={12}>
+            <InfoCard key={`Tool-${idx}`} data={element} />
+          </Grid>
+        ))}
+      </Grid>
+      <div className={classes.center}>
+        <FloatAddButton />
+      </div>
     </>
   )
 }

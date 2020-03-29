@@ -21,9 +21,12 @@ const FloatAddButton = props => {
       color="primary"
       size="small"
       className={classes.root}
+      target="_blank"
+      rel="noreferrer"
+      href="https://forms.gle/oXVawrWcM3x3NAdS6"
     >
       <AddIcon className={classes.extendedIcon} />
-      Sumbit new Project
+      Sumbit a Project
     </Fab>
   )
 }
