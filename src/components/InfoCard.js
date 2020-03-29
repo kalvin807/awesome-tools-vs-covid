@@ -1,5 +1,5 @@
-import * as randomColor from 'random-material-color'
-import * as sample from 'lodash/_arraySample'
+import randomColor from 'random-material-color'
+import sample from 'lodash/_arraySample'
 
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -35,7 +35,6 @@ const emojiBank = [
   '🙂',
   '👍🏻',
   '💪🏻',
-  '👋🏻',
   '🌎',
   '💻',
   '🌟',
@@ -66,7 +65,7 @@ const TagChip = props => {
       size="small"
       label={props.tag}
       style={{
-        backgroundColor: randomColor.getColor({ shades: ['200', '300'] }),
+        backgroundColor: randomColor.getColor({ shades: ['200'] }),
       }}
     />
   )
@@ -78,23 +77,25 @@ const CountryTagChip = props => {
   return <TagChip tag={`${emoji} ${props.country}`} />
 }
 
-const StyledLink = props => {
-  const { url } = props
+export const StyledLink = props => {
+  const { url, linkText } = props
   let linkProps = {
     size: 'small',
-    herf: url,
+    href: url,
     color: 'primary',
+    target: '_blank',
+    rel: 'noreferrer',
   }
-  let linkText = 'Learn More'
+  let defaultlinkText = 'Learn More'
 
   if (isGitHub(url)) {
     linkProps = {
       ...linkProps,
       startIcon: <GitHubIcon />,
     }
-    linkText = 'GitHub'
+    defaultlinkText = 'GitHub'
   }
-  return <Button {...linkProps}>{linkText}</Button>
+  return <Button {...linkProps}>{linkText || defaultlinkText}</Button>
 }
 
 const LinksBox = props => {
@@ -102,7 +103,7 @@ const LinksBox = props => {
   const { urls } = props
   return (
     <CardActions className={classes.linkBox}>
-      {urls.map(url => (url ? <StyledLink url={url} /> : null))}
+      {urls.map(url => (url ? <StyledLink key={url} url={url} /> : null))}
     </CardActions>
   )
 }
@@ -134,7 +135,7 @@ const InfoCard = props => {
         )}
         {country && <CountryTagChip country={country} />}
         {tags &&
-          tags.map(t => <TagChip keys={`${data.name_en}-tag-${t}`} tag={t} />)}
+          tags.map(t => <TagChip key={`${data.name_en}-tag-${t}`} tag={t} />)}
         <Divider />
       </CardContent>
       {showcaseUrl && devUrl && <LinksBox urls={[showcaseUrl, devUrl]} />}
